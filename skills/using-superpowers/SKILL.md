@@ -47,8 +47,8 @@ Skills use Claude Code tool names. Non-CC platforms: see `references/codex-tools
 digraph skill_flow {
     "User message received" [shape=doublecircle];
     "About to EnterPlanMode?" [shape=doublecircle];
-    "Already brainstormed?" [shape=diamond];
-    "Invoke brainstorming skill" [shape=box];
+    "Already planned with ccpm?" [shape=diamond];
+    "Invoke ccpm skill" [shape=box];
     "Might any skill apply?" [shape=diamond];
     "Invoke Skill tool" [shape=box];
     "Announce: 'Using [skill] to [purpose]'" [shape=box];
@@ -57,10 +57,10 @@ digraph skill_flow {
     "Follow skill exactly" [shape=box];
     "Respond (including clarifications)" [shape=doublecircle];
 
-    "About to EnterPlanMode?" -> "Already brainstormed?";
-    "Already brainstormed?" -> "Invoke brainstorming skill" [label="no"];
-    "Already brainstormed?" -> "Might any skill apply?" [label="yes"];
-    "Invoke brainstorming skill" -> "Might any skill apply?";
+    "About to EnterPlanMode?" -> "Already planned with ccpm?";
+    "Already planned with ccpm?" -> "Invoke ccpm skill" [label="no"];
+    "Already planned with ccpm?" -> "Might any skill apply?" [label="yes"];
+    "Invoke ccpm skill" -> "Might any skill apply?";
 
     "User message received" -> "Might any skill apply?";
     "Might any skill apply?" -> "Invoke Skill tool" [label="yes, even 1%"];
@@ -96,11 +96,13 @@ These thoughts mean STOP—you're rationalizing:
 
 When multiple skills could apply, use this order:
 
-1. **Process skills first** (brainstorming, debugging) - these determine HOW to approach the task
-2. **Implementation skills second** (frontend-design, mcp-builder) - these guide execution
+1. **Process skills first** (ccpm, debugging) - these determine HOW to approach the task
+2. **Design skills** (ui-ux-pro-max) - for any UI/visual work, run alongside ccpm during planning and before review
+3. **Implementation skills second** (frontend-design, mcp-builder) - these guide execution
 
-"Let's build X" → brainstorming first, then implementation skills.
+"Let's build X" → ccpm first (PRD → Epic → Issues → Code); if UI is involved, ui-ux-pro-max during planning and before review.
 "Fix this bug" → debugging first, then domain-specific skills.
+"Review UI changes" → ui-ux-pro-max Pre-Delivery Checklist before code reviewer.
 
 ## Skill Types
 

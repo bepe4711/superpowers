@@ -21,6 +21,26 @@ Dispatch superpowers:code-reviewer subagent to catch issues before they cascade.
 - Before refactoring (baseline check)
 - After fixing complex bug
 
+## UI/UX Review Gate
+
+Before dispatching the code reviewer, check if the changes include user-facing UI (screens, components, layouts, styles):
+
+**If yes — run UI UX Pro Max validation first:**
+
+```bash
+# UX best practices pass
+python3 skills/ui-ux-pro-max/scripts/search.py "animation accessibility z-index loading" --domain ux
+
+# Check dark mode and contrast concerns
+python3 skills/ui-ux-pro-max/scripts/search.py "contrast dark mode" --domain style
+```
+
+Then invoke the `ui-ux-pro-max` skill and run through its **Pre-Delivery Checklist** (Visual Quality, Interaction, Light/Dark Mode, Layout, Accessibility). Fix any issues before dispatching the code reviewer — UI/UX findings are not optional for UI changes.
+
+Include a summary of the UI/UX pass in `{WHAT_WAS_IMPLEMENTED}` when filling the code reviewer template.
+
+---
+
 ## How to Request
 
 **1. Get git SHAs:**
